@@ -8,7 +8,7 @@ const service: CRUDService = new CRUDService(logger);
 export async function createProductHandler(req: Request, res: Response) {
     try {
         const payload = req.body;
-        const result = await service.insertData("INSERT INTO employee SET ?", payload);
+        const result = await service.insertData("INSERT INTO product SET ?", payload);
         logger.info(result);
         res.send(result);
     } catch (error) {
@@ -20,9 +20,9 @@ export async function createProductHandler(req: Request, res: Response) {
 export async function getProductsHandler(req: Request, res: Response) {
     try {
         const id: any = req.query.id;
-        let sqlquery: string = "SELECT * from employee";
+        let sqlquery: string = "SELECT * from product";
         if (id !== undefined) {
-            sqlquery = `SELECT * from employee WHERE id=${id}`;
+            sqlquery = `SELECT * from product WHERE id=${id}`;
         }
         const result = await service.executeQuery(sqlquery);
         logger.info(result);
@@ -36,7 +36,7 @@ export async function getProductsHandler(req: Request, res: Response) {
 export async function deleteProductHandler(req: Request, res: Response) {
     try {
         const id: string = `${req.query.id}`;
-        const result = await service.executeQuery(`DELETE FROM employee WHERE id=${id}`);
+        const result = await service.executeQuery(`DELETE FROM product WHERE id=${id}`);
         logger.info(result);
         res.send(result);
     } catch (error) {
@@ -47,9 +47,9 @@ export async function deleteProductHandler(req: Request, res: Response) {
 
 export async function updateProductHandler(req: Request, res: Response) {
     try {
-        var employee: Product = req.body;
+        var product: Product = req.body;
         //using remote database for testing - if using mysql server we can use procedure 
-        const result = await service.executeQuery(`UPDATE employee SET name=\'${employee.name}\', email=\'${employee.email}\' WHERE id=${employee.id}`);
+        const result = await service.executeQuery(`UPDATE product SET product_name=\'${product.product_name}\', support_contact_email=\'${product.support_contact_email}\' WHERE id=${product.id}`);
         logger.info(result);
         res.send(result);
     } catch (error) {

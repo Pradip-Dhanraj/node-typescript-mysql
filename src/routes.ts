@@ -2,12 +2,12 @@ import { Express, Request, Response } from "express";
 import { createProductHandler, getProductsHandler, deleteProductHandler, updateProductHandler } from "./controller/product.controller";
 import { createDBHandler, createTableHandler } from "./controller/database.controller";
 import validateMiddleware from "./middleware/zod.middleware";
-import dataSchema, { updateProductSchema } from "./schema/product.schema";
+import { dataSchema, updateProductSchema } from "./schema/product.schema";
 
 function routes(app: Express) {
 
     //db handling
-    app.get("/db/createdb", createDBHandler); // removing as online sql hosting does not have previleges to create new database
+    //app.get("/db/createdb", createDBHandler); // removing as remote online sql hosting does not have previleges to create new database
     app.get("/db/createtable", createTableHandler);
 
     //to create product

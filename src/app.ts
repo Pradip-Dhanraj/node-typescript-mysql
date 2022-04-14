@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import logger from "./utils/logger";
 import createServer from "./utils/server";
-import { GetConnection, PingDBConnection } from "./utils/connect";
+import { PingDBConnection } from "./utils/connect";
 
 const port = config.get<number>("port");
 
