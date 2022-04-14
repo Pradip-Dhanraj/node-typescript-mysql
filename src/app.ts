@@ -10,7 +10,7 @@ const port = config.get<number>("port");
 
 const app = createServer();
 
-app.listen(port, async () => {
+app.listen(process.env.PORT || port, async () => {
     logger.info(`App is running at http://localhost:${port}`);
     PingDBConnection();
 });
