@@ -13,21 +13,30 @@ const dataSchema = z.object({
     }),
 });
 
+export const updateProductSchema = z.object({
+    body: z.object({
+        id: z.number({
+            required_error: "Id required to update data in table",
+        }),
+        name: z.string({
+            required_error: "Full name is required",
+        }),
+        email: z
+            .string({
+                required_error: "Email is required",
+            })
+            .email("Not a valid email"),
+    }),
+});
+
 export default dataSchema;
 
-type Nullable<T> = T | null;
-
 interface IBaseProduct {
-    productId?: Nullable<number>;
+    id: number;
 }
 
-class Product implements IBaseProduct {
-    productId: Nullable<number>;
-    name: string;
-    email: string;
-    constructor(name: string, email: string) {
-        this.productId = 0;
-        this.name = name;
-        this.email = email;
-    }
+export class Product implements IBaseProduct {
+    id!: number;
+    name!: string;
+    email!: string;
 }
