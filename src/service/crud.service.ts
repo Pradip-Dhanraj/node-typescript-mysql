@@ -9,7 +9,7 @@ export default class CRUDService {
         this.log = logger;
     }
     async executeQuery(query: string) {
-        return await new Promise<boolean>(async (resolve, reject) => {
+        return await new Promise<any>(async (resolve, reject) => {
             //const connection = await GetConnection();
             logger.debug(`connection status : ${connection?.config}`)
             connection?.query(query, (err: MysqlError | null, result, fields) => {

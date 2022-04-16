@@ -1,8 +1,9 @@
 import { Express, Request, Response } from "express";
-import { createProductHandler, getProductsHandler, deleteProductHandler, updateProductHandler } from "./controller/product.controller";
+import { createblogHandler, getblogsHandler, deleteblogHandler, updateblogHandler } from "./controller/blog.controller";
 import { createDBHandler, createTableHandler } from "./controller/database.controller";
 import validateMiddleware from "./middleware/zod.middleware";
-import { dataSchema, updateProductSchema } from "./schema/product.schema";
+import { blogSchema } from "./schema/blog.schema";
+import { blogHandler } from "./controller/view.controller";
 
 function routes(app: Express) {
 
@@ -11,15 +12,16 @@ function routes(app: Express) {
     app.get("/db/createtable", createTableHandler);
 
     //to create product
-    app.post("/api/product", validateMiddleware(dataSchema), createProductHandler);
-    app.get("/api/product", getProductsHandler);
-    app.delete("/api/product", deleteProductHandler);
-    app.put("/api/product", validateMiddleware(updateProductSchema), updateProductHandler);
+    app.post("/api/blog", validateMiddleware(blogSchema), createblogHandler);
+    app.get("/api/blog", getblogsHandler);
+    app.delete("/api/blog", deleteblogHandler);
+    app.put("/api/blog", validateMiddleware(blogSchema), updateblogHandler);
 
     //to test running environment
     app.get("/", (req: Request, res: Response) => {
         res.send(`App is running on ${process.env.NODE_ENV} environment`);
     });
+
 }
 
 export default routes;

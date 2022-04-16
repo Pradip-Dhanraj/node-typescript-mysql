@@ -8,7 +8,7 @@ const service: CRUDService = new CRUDService(logger);
 
 export async function createDBHandler(req: Request, res: Response) {
     try {
-        const result = await service.executeQuery("CREATE DATABASE dhanrajdb");
+        const result = await service.executeQuery("CREATE DATABASE blogdb");
         logger.info(result);
         res.send(result);
     } catch (error) {
@@ -19,7 +19,7 @@ export async function createDBHandler(req: Request, res: Response) {
 
 export async function createTableHandler(req: Request, res: Response) {
     try {
-        const result = await service.executeQuery("CREATE TABLE product(id int AUTO_INCREMENT, product_name VARCHAR(255), support_contact_email VARCHAR(255), PRIMARY KEY(id))");
+        const result = await service.executeQuery("CREATE TABLE blog(id int AUTO_INCREMENT, blogtitle VARCHAR(255), email VARCHAR(255), blog VARCHAR(1000), PRIMARY KEY(id))");
         logger.info(result);
         res.send(result);
     } catch (error) {
@@ -27,4 +27,3 @@ export async function createTableHandler(req: Request, res: Response) {
         res.send(error);
     }
 }
-
